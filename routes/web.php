@@ -21,23 +21,16 @@ Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('layout.master');
     });
+    Route::prefix('product')->group(function () {
 
-    Route::get('product-list', function () {
-        return view('admin.product.list');
-    })->name('product-list');
+        Route::get('product-list', function () {
+            return view('admin.product.list');
+        })->name('product-list');
+
+    };
 
     Route::get('category-add' ,function(){
        return view('admin.category.list');
     })->name('category-list');
 });
 
-Route::get('/register', function(){
-    return view('register');
-});
-
-
-Route::get('/register-success', function (Request $request) {
-    // Nhận dữ liệu và truyền sang cho view request-success.blade.php
-    $requestData = $request->all(); // ['name' => gtri, 'email' => gtr, 'password' => gtri]
-    return view('register-success', $requestData);
-})->name('regis-success');
