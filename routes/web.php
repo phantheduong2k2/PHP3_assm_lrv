@@ -21,16 +21,22 @@ Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('layout.master');
     });
-    Route::prefix('product')->group(function () {
+// Product
+     Route::prefix('product')->group(function(){
 
-        Route::get('product-list', function () {
+        Route::get('list', function () {
             return view('admin.product.list');
         })->name('product-list');
 
-    };
+        Route::get('add', function(){
 
-    Route::get('category-add' ,function(){
-       return view('admin.category.list');
-    })->name('category-list');
+        });
+     });
+// category
+    Route::prefix('category')->group(function (){
+        Route::get('add' ,function(){
+            return view('admin.category.add');
+         })->name('category-add');
+    });
 });
 
