@@ -4,6 +4,14 @@
     <div class="card-header">
         <h3>Add category</h3>
     </div>
+    @if ($errors->any())
+        <ul class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+
+@endif
     <div class="card-body">
         <form action="{{ Route('category-store') }}" method="POST">
             @csrf

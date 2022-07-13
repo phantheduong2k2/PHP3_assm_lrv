@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\Category\StoreRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -16,11 +16,17 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Request $request )
     {
-        $data = Category::get();
+        $search = $request->get('q');
+        $data = Category::Where('name','like','%'. $search. '%')
+        ->paginate(5);
 
-        return view('admin.category.list',['data'=> $data]);
+        $data->appends(['q'=> $search]);
+
+        return view('admin.category.list',[
+            'search' => $search,
+            'data'=> $data]);
     }
 
     /**
@@ -39,7 +45,7 @@ class CategoryController extends Controller
      * @param  \App\Http\Requests\StoreCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
     //    $categoryNew = new Category();
     //    $categoryNew->fill($request->all());
