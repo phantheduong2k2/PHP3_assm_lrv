@@ -50,7 +50,7 @@ class CategoryController extends Controller
     //    $categoryNew = new Category();
     //    $categoryNew->fill($request->all());
     //    $save = $categoryNew->save();
-       Category::create($request->all());
+       Category::create($request->validated());
        return redirect(Route('category-list'))->with('msg-suc', 'Bạn đã thêm thành công!');
     }
 

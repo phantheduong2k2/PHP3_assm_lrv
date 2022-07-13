@@ -25,9 +25,10 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => [
+                'bail',
                 'required',
                 'min:5',
-                'max:20',
+                'unique:App\Models\Category,name'
             ]
 
         ];
@@ -36,7 +37,9 @@ class StoreRequest extends FormRequest
     public function messages()
     {
         return [
-           'required' => 'Khong duoc de trong'
+           'required' => 'Tên danh mục không được để trống',
+           'min'=> 'Tên danh mục bắt buộc phải trên 5 kí tự',
+           'unique'=> 'Tên danh mục đã tông tại'
         ];
     }
 }
