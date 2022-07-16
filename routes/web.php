@@ -45,4 +45,6 @@ Route::prefix('admin')->group(function () {
 
         Route::post('edit/{id}',[CategoryController::class, 'update'])->name('category-update');
     });
+
+    Route::get('category/api', [CategoryController::class,'api'])->name('category.api');
 });

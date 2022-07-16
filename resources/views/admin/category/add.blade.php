@@ -1,4 +1,4 @@
-@extends('layout.master');
+@extends('layout.master')
 @section('col-sm-12')
     <div class="card">
         <div class="card-header">

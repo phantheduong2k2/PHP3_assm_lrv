@@ -158,6 +158,9 @@ File: style.css
     touch-action: auto;
     -ms-touch-action: auto;
 }
+.tile-header{
+    text-align: center;
+}
 
 /*
  * Scrollbar rail styles

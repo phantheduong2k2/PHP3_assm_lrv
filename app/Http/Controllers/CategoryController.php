@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Yajra\Datatables\Datatables;
 use App\Models\Category;
 use App\Http\Requests\Category\StoreRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Prophecy\Call\Call;
+
 
 class CategoryController extends Controller
 {
@@ -16,17 +17,19 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index( Request $request )
+    public function index(  )
     {
-        $search = $request->get('q');
-        $data = Category::Where('name','like','%'. $search. '%')
-        ->paginate(5);
+        // $search = $request->get('q');
+        // $data = Category::Where('name','like','%'. $search. '%')
+        // ->paginate(5);
 
-        $data->appends(['q'=> $search]);
+        // $data->appends(['q'=> $search]);
 
-        return view('admin.category.list',[
-            'search' => $search,
-            'data'=> $data]);
+        return view('admin.category.list');
+    }
+
+    public function api(){
+        return Datatables::of(Category::query())->make(true);
     }
 
     /**
