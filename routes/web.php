@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use  App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Models\Category;
 
 /*
@@ -26,10 +27,20 @@ Route::prefix('admin')->group(function () {
     });
 
 
-    Route::get('product-list', function () {
-        return view('admin.product.list');
-    })->name('product-list');
+    Route::prefix('product')->group(function(){
+          Route::get('list', [ProductController::class, 'index'])->name('product-list');
 
+          Route::get('create', [ProductController::class, 'create'])->name('product-create');
+
+          Route::post('store', [ProductController::class, 'store'])->name('product-store');
+
+          Route::get('edit/{id}', [ProductController::class, 'edit'])->name('product-edit');
+
+          Route::post('edit/{id}', [ProductController::class, 'update'])->name('product-update');
+
+          Route::get('delete/{id}',[ProductController::class, 'destroy'])->name('product-delete');
+
+    });
 
     Route::prefix('category')->group(function () {
 
@@ -46,5 +57,5 @@ Route::prefix('admin')->group(function () {
         Route::post('edit/{id}',[CategoryController::class, 'update'])->name('category-update');
     });
 
-    Route::get('category/api', [CategoryController::class,'api'])->name('category.api');
+
 });

@@ -15,6 +15,7 @@
                 @if ($errors->has('name'))
                     <div class="alert alert-danger"><span>{{ $errors->first('name') }} </span></div>
                 @endif
+               <button type="reset" class="btn btn-primary" >Reset</button>
                 <a class="btn btn-primary" href="{{ Route('category-list') }}">Back</a>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

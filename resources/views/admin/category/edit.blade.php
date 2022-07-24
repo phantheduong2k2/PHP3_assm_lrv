@@ -12,6 +12,7 @@
               <input type="text" class="form-control" name="name" value="{{ $categorys->name }}" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <a class="btn btn-primary" href="{{ Route('category-list') }}">Back</a>
+            <button type="reset" class="btn btn-primary" >Reset</button>
             <button type="submit" class="btn btn-primary">Update</button>
           </form>
     </div>
