@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use  App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductHomeController;
 use App\Models\Category;
 
 /*
@@ -17,9 +19,12 @@ use App\Models\Category;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomeController::class, 'index'])->name('home-client');
+
+Route::prefix('product')->group(function(){
+    Route::get('/' ,[ProductHomeController::class, 'index'])->name('client-product-list');
 });
+
 
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
