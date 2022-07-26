@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use  App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductHomeController;
@@ -21,9 +22,18 @@ use App\Models\Category;
 
 Route::get('/', [HomeController::class, 'index'])->name('home-client');
 
+Route::get('contact',[ContactController::class, 'index'])->name('contact-client');
+
+Route::prefix('auth')->group(function(){
+    Route::get('regiter', function(){
+      return view('auth.regiter-login');
+    })->name('regiter-login-client');
+});
+
 Route::prefix('product')->group(function(){
     Route::get('/' ,[ProductHomeController::class, 'index'])->name('client-product-list');
 });
+
 
 
 Route::prefix('admin')->group(function () {

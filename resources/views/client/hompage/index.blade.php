@@ -1,9 +1,11 @@
 @extends('layout.client-layout')
+@section('page-title', 'tramh chu')
+@include('client.element_client.header')
 @section('main')
     <section class="section-slide">
         <div class="wrap-slick1">
             <div class="slick1">
-                <div class="item-slick1" style="background-image: url('assets/images/client/slide-01.jpg');">
+                <div class="item-slick1" style="background-image: url('{{ asset('assets/images/client/slide-01.jpg') }}');">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
@@ -27,6 +29,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
     </section>
     <!-- Banner -->

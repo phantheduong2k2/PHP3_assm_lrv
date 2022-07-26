@@ -2,9 +2,9 @@
 <html lang="en">
 @include('client.element_client._head')
 <body class="animsition">
-
-    @include('client.element_client.header')
-
+<header>
+    @yield('header')
+</header>
      @yield('main')
 
 
