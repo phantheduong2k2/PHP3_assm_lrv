@@ -2,11 +2,11 @@
 @section('col-sm-12')
     <div class="card">
         <div class="card-header">
-            <h3 class="tile-header">List product</h3>
+            <h3 class="tile-header">List user</h3>
         </div>
         <div class="card-body">
             <caption>
-                <form action="{{ Route('product-list') }}" method="get">
+                <form action="{{ Route('user-list') }}" method="get">
                     @csrf
                     <input class="form-control" value="{{ $name }}" placeholder="Tim Kiem" type="search"
                         name="name">
@@ -15,44 +15,40 @@
         </div>
         <div class="card-body table-border-style">
             <div class="table-responsive">
-                <a class="btn  btn-primary" href="{{ Route('product-create') }}">Create</a>
+                <a class="btn  btn-primary" href="{{ Route('user-create') }}">Create</a>
                 <table class="table">
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Ten san pham</th>
-                            <th>Gia</th>
+                            <th>Tên người dùng</th>
+                            <th>Email</th>
                             <th>Image</th>
-                            <th>Danh muc</th>
-                            <th>Trang thai</th>
+                            <th>Level</th>
                             <th>Chuc nang</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($product_list as $item)
+                        @foreach ($user_list as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->name }}</td>
-                                <td>{{ $item->price }}</td>
+                                <td>{{ $item->email }}</td>
                                 <td>
                                     <img src="{{ asset($item->avatar) }}" width="100" alt="">
                                 </td>
                                 <td>
-                                    {{ $item->category->name }}
-                                </td>
-                                <td>
-                                    @if ($item->status == 0)
-                                        <a href="{{ Route('product-updateStatus', $item->id) }}"
-                                            class="btn btn-success">Hien</a>
+                                    @if ($item->level == 1)
+                                        <a href="{{ Route('user-updateLevel', $item->id) }}"
+                                            class="btn btn-success">Quan tri</a>
                                     @else
-                                        <a href="{{ Route('product-updateStatus', $item->id) }}"
-                                            class="btn btn-danger">An</a>
+                                        <a href="{{ Route('user-updateLevel', $item->id) }}"
+                                            class="btn btn-danger">Khach hang</a>
                                     @endif
                                 </td>
                                 <td>
                                     <a class="btn btn-outline-warning"
-                                        href="{{ Route('product-delete', $item->id) }}">Delete</a>
-                                    <a class="btn  btn-info" href="{{ Route('product-edit', $item->id) }}">Edit</a>
+                                        href="">Delete</a>
+                                    <a class="btn  btn-info" href="">Edit</a>
 
                                 </td>
                             </tr>
@@ -60,9 +56,11 @@
                     </tbody>
                 </table>
                 <div class="paginate">
-                    {{ $product_list->links() }}
+                    {{ $user_list->links() }}
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+

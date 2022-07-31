@@ -22,7 +22,8 @@ class ProductController extends Controller
             $product = product::Where('name','like','%'. $name. '%')
             ->paginate(5);
         }else{
-            $product = product::select('id','name','price', 'avatar', 'status')
+            $product = product::select('*')
+            ->with('category')
             ->paginate(5);
         }
 
@@ -62,6 +63,8 @@ class ProductController extends Controller
 
         return $file->storeAs($folder, $fileName);
     }
+
+    // Ham save file
     public function store(Request $request)
     {
         $product = new Product();
@@ -145,5 +148,16 @@ class ProductController extends Controller
               product::destroy($id);
          }
       return redirect(Route('product-list'))->with('msg-dl', 'xoa thanh cong');
+    }
+
+    public function updateStatus($id){
+        $statusUpdate = product::select('status')->where('id', $id)->first();
+        if($statusUpdate->status == 0){
+            $status = 1;
+        }else{
+            $status = 0;
+        }
+         product::where('id', $id)->update(['status'=> $status]);
+         return redirect()->back();
     }
 }

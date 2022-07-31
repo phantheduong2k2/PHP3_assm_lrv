@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use  App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductHomeController;
+use App\Http\Controllers\UserController;
 use App\Models\Category;
 
 /*
@@ -19,58 +21,69 @@ use App\Models\Category;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', [HomeController::class, 'index'])->name('home-client');
-
-Route::get('contact',[ContactController::class, 'index'])->name('contact-client');
-
-Route::prefix('auth')->group(function(){
-    Route::get('regiter', function(){
-      return view('auth.regiter-login');
-    })->name('regiter-login-client');
+Route::prefix('auth')->group(function () {
+    Route::get('regiter',[AuthController::class, 'login'])->name('regiter-login-client');
 });
+Route::group([
+    'middleware' => 'admin'
+], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home-client');
 
-Route::prefix('product')->group(function(){
-    Route::get('/' ,[ProductHomeController::class, 'index'])->name('client-product-list');
-});
+    Route::get('contact', [ContactController::class, 'index'])->name('contact-client');
 
-
-
-Route::prefix('admin')->group(function () {
-    Route::get('/', function () {
-        return view('layout.master');
+    Route::prefix('product')->group(function () {
+        Route::get('/', [ProductHomeController::class, 'index'])->name('client-product-list');
+        Route::get('detail/{id}', [ProductHomeController::class, 'show'])->name('client-product-detail');
     });
 
 
-    Route::prefix('product')->group(function(){
-          Route::get('list', [ProductController::class, 'index'])->name('product-list');
 
-          Route::get('create', [ProductController::class, 'create'])->name('product-create');
+    Route::prefix('admin')->group(function () {
+        Route::get('/', function () {
+            return view('layout.master');
+        });
 
-          Route::post('store', [ProductController::class, 'store'])->name('product-store');
 
-          Route::get('edit/{id}', [ProductController::class, 'edit'])->name('product-edit');
+        Route::prefix('product')->group(function () {
+            Route::get('list', [ProductController::class, 'index'])->name('product-list');
 
-          Route::post('edit/{id}', [ProductController::class, 'update'])->name('product-update');
+            Route::get('create', [ProductController::class, 'create'])->name('product-create');
 
-          Route::get('delete/{id}',[ProductController::class, 'destroy'])->name('product-delete');
+            Route::post('store', [ProductController::class, 'store'])->name('product-store');
 
+            Route::get('edit/{id}', [ProductController::class, 'edit'])->name('product-edit');
+
+            Route::post('edit/{id}', [ProductController::class, 'update'])->name('product-update');
+
+            Route::get('delete/{id}', [ProductController::class, 'destroy'])->name('product-delete');
+
+            Route::get('updateStatus/{id}', [ProductController::class, 'updateStatus'])->name('product-updateStatus');
+        });
+
+        Route::prefix('category')->group(function () {
+
+            Route::get('list', [CategoryController::class, 'index'])->name('category-list');
+
+            Route::get('add', [CategoryController::class, 'create'])->name('category-create');
+
+            Route::post('add', [CategoryController::class, 'store'])->name('category-store');
+
+            Route::get('delete/{id}', [CategoryController::class, 'destroy'])->name('category-delete');
+
+            Route::get('edit/{id}', [CategoryController::class, 'edit'])->name('category-edit');
+
+            Route::post('edit/{id}', [CategoryController::class, 'update'])->name('category-update');
+        });
+
+        Route::prefix('user')->group(function () {
+
+            Route::get('list', [UserController::class, 'index'])->name('user-list');
+
+            Route::get('add', [UserController::class, 'create'])->name('user-create');
+
+            Route::post('add', [UserController::class, 'store'])->name('user-store');
+
+            Route::get('updateLevels/{id}', [UserController::class, 'updateLevels'])->name('user-updateLevel');
+        });
     });
-
-    Route::prefix('category')->group(function () {
-
-        Route::get('list', [CategoryController::class, 'index'])->name('category-list');
-
-        Route::get('add', [CategoryController::class,'create'])->name('category-create');
-
-        Route::post('add',[CategoryController::class, 'store'] )->name('category-store');
-
-        Route::get('delete/{id}',[CategoryController::class, 'destroy'])->name('category-delete');
-
-        Route::get('edit/{id}',[CategoryController::class, 'edit'])->name('category-edit');
-
-        Route::post('edit/{id}',[CategoryController::class, 'update'])->name('category-update');
-    });
-
-
 });

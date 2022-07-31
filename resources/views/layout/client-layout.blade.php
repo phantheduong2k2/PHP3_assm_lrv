@@ -11,6 +11,8 @@
     @include('client.element_client.footer')
     @include('client.element_client.script')
 
+
+
 </body>
 
 </html>

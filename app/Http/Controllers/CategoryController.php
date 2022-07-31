@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+
 use Yajra\Datatables\Datatables;
 use App\Models\Category;
 use App\Http\Requests\Category\StoreRequest;
@@ -19,6 +21,7 @@ class CategoryController extends Controller
     {
         $search = $request->get('q');
         $data = Category::Where('name','like','%'. $search. '%')
+        ->with('products')
         ->paginate(5);
 
         $data->appends(['q'=> $search]);

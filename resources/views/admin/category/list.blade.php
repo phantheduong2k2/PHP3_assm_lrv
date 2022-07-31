@@ -33,6 +33,7 @@
                             <tr>
                                 <th>STT</th>
                                 <th>Name</th>
+                                <th>san pham thuoc danh muc</th>
                                 <th>Created_at</th>
                                 <th>Chức năng</th>
                             </tr>
@@ -42,6 +43,13 @@
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->name }}</td>
+                            <td>
+                                @foreach ($item->products as $product )
+                                         <ul>
+                                            <li>{{ $product->name }}</li>
+                                         </ul>
+                                @endforeach
+                            </td>
                             <td>{{ $item->created_at }}</td>
                             <td>
                                 <a class="btn  btn-primary" href="{{ Route('category-edit', $item->id) }}">Edit</a>
