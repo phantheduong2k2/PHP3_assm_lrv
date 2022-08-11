@@ -5,10 +5,15 @@
             <h3 class="tile-header">List product</h3>
         </div>
         @if (session('msg-dl'))
-        <div class="alert alert-success" role="alert">
-            {{ session('msg-dl') }}
-        </div>
-    @endif
+            <div class="alert alert-success" role="alert">
+                {{ session('msg-dl') }}
+            </div>
+        @endif
+        @if (session('msg-ed'))
+            <div class="alert alert-success" role="alert">
+                {{ session('msg-ed') }}
+            </div>
+        @endif
         <div class="card-body">
             <caption>
                 <form action="{{ Route('product-list') }}" method="get">
@@ -46,10 +51,10 @@
                                 <td>
                                     @if ($item->status == 0)
                                         <a href="{{ Route('product-updateStatus', $item->id) }}"
-                                            class="btn btn-success">Hien</a>
+                                            class="btn btn-success">Hiển Thị </a>
                                     @else
                                         <a href="{{ Route('product-updateStatus', $item->id) }}"
-                                            class="btn btn-danger">An</a>
+                                            class="btn btn-danger">Ẩn</a>
                                     @endif
                                 </td>
                                 <td>

@@ -185,7 +185,7 @@
 
                                 <div class="bor8 bg0 m-b-22">
                                     <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text"
-                                        name="postcode" value="{{ Auth::user()->phone }}}}">
+                                        name="postcode" value="{{ Auth::user()->phone }}">
                                 </div>
 
                                 <div class="flex-w">

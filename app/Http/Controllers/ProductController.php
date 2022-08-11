@@ -150,7 +150,7 @@ class ProductController extends Controller
      * @param  \App\Models\product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreProduct $request, $id)
+    public function update(Request $request, $id)
     {
 
         $product = product::find($id);
@@ -164,7 +164,7 @@ class ProductController extends Controller
         }
 
         $save = $product->save();
-        return redirect(Route('product-list'))->with('msg-sc', 'them thanh cong');
+        return redirect(Route('product-list'))->with('msg-ed', 'Cập nhật thành công');
 
     }
 
