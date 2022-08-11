@@ -2,6 +2,7 @@
 @section('page-title', 'contact')
 @include('client.element_client.head-v4')
 @section('main')
+
 <div class="wrap-header-cart js-panel-cart">
     <div class="s-full js-hide-cart"></div>
 

@@ -19,4 +19,10 @@ class Category extends Model
         return $this->hasMany(product::class, 'categorie_id', 'id');
     }
 
+    public function attributes()
+    {
+        return $this->belongsToMany(attributes::class ,'attribute_products', 'pro_id','attr_pro_id' );
+    }
+
+
 }

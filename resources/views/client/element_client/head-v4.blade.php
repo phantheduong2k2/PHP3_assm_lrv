@@ -1,8 +1,9 @@
+@section('header-v4')
 <header class="header-v4">
     <!-- Header desktop -->
     <div class="container-menu-desktop">
         <!-- Topbar -->
-        <div class="top-bar">
+        <div class="top-bar"> <div class="top-bar">
             <div class="content-topbar flex-sb-m h-full container">
                 <div class="left-top-bar">
                     Free shipping for standard order over $100
@@ -10,24 +11,16 @@
 
                 <div class="right-top-bar flex-w h-full">
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        Help &amp; FAQs
+                        Help & FAQs
                     </a>
 
-                    <a href="{{ Route('regiter-login-client') }}" class="flex-c-m trans-04 p-lr-25">
-                        My Account
-                    </a>
+                  <a href="{{ Route('getLogin-client') }}" class="flex-c-m trans-04 p-lr-25">
+                    My Account
+                </a>
 
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        EN
-                    </a>
-
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        USD
-                    </a>
                 </div>
             </div>
         </div>
-
         <div class="wrap-menu-desktop how-shadow1" style="top: 40px;">
             <nav class="limiter-menu-desktop container">
 
@@ -67,11 +60,11 @@
                         <i class="zmdi zmdi-search"></i>
                     </div>
 
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ \App\Models\Cart::select('*')->where('user_id', Auth::id() )-> orderBy('id', 'desc')->get()->count() }}">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
 
-                    <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+                    <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
                         <i class="zmdi zmdi-favorite-outline"></i>
                     </a>
                 </div>
@@ -191,3 +184,4 @@
         </div>
     </div>
 </header>
+@endsection

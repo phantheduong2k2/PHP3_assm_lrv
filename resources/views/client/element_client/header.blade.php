@@ -1,7 +1,7 @@
 
-
     <!-- Header desktop -->
-    @section('header')
+    @section('header-v4')
+    <header >
         <div class="container-menu-desktop">
             <!-- Topbar -->
             <div class="top-bar">
@@ -14,18 +14,27 @@
                         <a href="#" class="flex-c-m trans-04 p-lr-25">
                             Help & FAQs
                         </a>
-
-                        <a href="{{ Route('regiter-login-client') }}" class="flex-c-m trans-04 p-lr-25">
-                            My Account
+                        @if (Auth::check())
+                        <a href="" class="flex-c-m trans-04 p-lr-25">
+                        Wellcome   {{ Auth::user()->name }}
                         </a>
-
-                        <a href="#" class="flex-c-m trans-04 p-lr-25">
-                            EN
+                      @else
+                      <a href="{{ Route('getLogin-client') }}" class="flex-c-m trans-04 p-lr-25">
+                        My Account
+                    </a>
+                    @endif
+                        @if (Auth::check())
+                        <a href="{{ Route('getLogout') }}" class="flex-c-m trans-04 p-lr-25">
+                          Log out
                         </a>
+                        @endif
 
-                        <a href="#" class="flex-c-m trans-04 p-lr-25">
-                            USD
-                        </a>
+                        @if( Auth::user()->level > 0)
+                            <a href="{{ Route('user-list') }}" class="flex-c-m trans-04 p-lr-25">
+                              ADMIN
+                             </a>
+
+                        @endif
                     </div>
                 </div>
             </div>
@@ -65,18 +74,19 @@
 
                     <!-- Icon header -->
                     <div class="wrap-icon-header flex-w flex-r-m">
-                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-                            <i class="zmdi zmdi-search"></i>
-                        </div>
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+							<i class="zmdi zmdi-search"></i>
+						</div>
 
-                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-                            <i class="zmdi zmdi-shopping-cart"></i>
-                        </div>
-
-                        <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-                            <i class="zmdi zmdi-favorite-outline"></i>
-                        </a>
+                   <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ \App\Models\Cart::select('*')->where('user_id', Auth::id() )-> orderBy('id', 'desc')->get()->count() }}">
+                    <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
+
+
+						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11  data-notify="0">
+							<i class="zmdi zmdi-favorite-outline"></i>
+						</a>
+					</div>
                 </nav>
             </div>
         </div>
@@ -184,14 +194,16 @@
                     <img src="{{ asset('assets/images/client/icons/icon-close2.png') }}" alt="CLOSE">
                 </button>
 
-                <form class="wrap-search-header flex-w p-l-15">
+                <form action="{{ Route('home-client') }}" method="get" class="wrap-search-header flex-w p-l-15">
                     <button class="flex-c-m trans-04">
                         <i class="zmdi zmdi-search"></i>
                     </button>
-                    <input class="plh3" type="text" name="search" placeholder="Search...">
+                    <input class="plh3" value="{{ $name }}" type="search" name="name" placeholder="Search...">
                 </form>
             </div>
         </div>
+    </header>
+
     @endsection
 
 

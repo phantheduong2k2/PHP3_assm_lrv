@@ -1,5 +1,5 @@
 @extends('layout.client-layout')
-@section('page-title', 'contact')
+@section('page-title', 'Login')
 @include('client.element_client.head-v4')
 @section('main')
     <div class="wrap-header-cart js-panel-cart">
@@ -94,21 +94,35 @@
         <div class="container">
             <div class="flex-w flex-tr">
                 <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
-                    <form>
+                    <form action="{{ Route('postLogin-client') }}" method="POST">
+                        @csrf
                         <h4 class="mtext-105 cl2 txt-center p-b-30">
                             Log in user
                         </h4>
-
                         <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="name"
-                                placeholder="Your username">
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" value="{{ old('email_lg') }}" type="text" name="email"
+                                placeholder="Your email">
+                                @if ($errors->has('email_lg'))
+                                <div class="alert alert-danger"><span>{{ $errors->first('email_lg') }} </span></div>
+                            @endif
                         </div>
 
                         <div class="bor8 m-b-30">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="name"
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" value="{{ old('password_lg') }}" type="password" name="password"
                                 placeholder="Password">
+                                @if ($errors->has('password_lg'))
+                                <div class="alert alert-danger"><span>{{ $errors->first('password_lg') }} </span></div>
+                            @endif
                         </div>
-
+                        @if (session('msg'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('msg') }}
+                        </div>
+                    @endif
+                     <div  class="custom-control custom-checkbox text-left mb-4 mt-2">
+                        <input type="checkbox" style="margin-right: 10px" id="customCheck1"> Nhớ tài khoản của tôi
+                    </div>
+                    <div class="custom-control custom-checkbox text-left mt-3">  <a href="{{ Route('getLoginGoogle') }}">Login Google</a></div>
                         <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
                             Submit
                         </button>
@@ -116,25 +130,49 @@
                 </div>
 
                 <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
-                    <form>
+                    <form action="{{ Route('regiter-client') }}" method="POST">
+                        @csrf
                         <h4 class="mtext-105 cl2 txt-center p-b-30">
                            Regiter user
                         </h4>
+                        @if (session('msg_rg'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('msg_rg') }}
+                        </div>
+                    @endif
                         <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="name"
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" value="{{ old('name') }}" type="text" name="name"
                                 placeholder="Your username">
+                                @if ($errors->has('name'))
+                                <div class="alert alert-danger"><span>{{ $errors->first('name') }} </span></div>
+                            @endif
                         </div>
                         <div class="bor8 m-b-30">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="name"
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" value="{{ old('password') }}" name="password"
                                 placeholder="Password">
+                                @if ($errors->has('password_rg'))
+                                <div class="alert alert-danger"><span>{{ $errors->first('password') }} </span></div>
+                            @endif
                         </div>
                         <div class="bor8 m-b-20 how-pos4-parent">
                             <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="email" name="email"
                                 placeholder="Your email">
+                                @if ($errors->has('email'))
+                                <div class="alert alert-danger"><span>{{ $errors->first('email') }} </span></div>
+                            @endif
                         </div>
                         <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="phone"
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text"  value="{{ old('phone') }}"  name="phone"
                                 placeholder="Your phone number">
+                                @if ($errors->has('phone'))
+                                <div class="alert alert-danger"><span>{{ $errors->first('phone') }} </span></div>
+                            @endif
+                        </div>
+                        <div class="bor8 m-b-20 how-pos4-parent">
+                           <textarea class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30"  name="address"  cols="25" rows="10"   placeholder="Your address">{{   old('address')}}</textarea>
+                           @if ($errors->has('address'))
+                           <div class="alert alert-danger"><span>{{ $errors->first('address') }} </span></div>
+                       @endif
                         </div>
                         <div class="custom-control custom-checkbox text-left mb-4 mt-2">
 							<input type="checkbox" style="margin-right: 10px" id="customCheck1"> Tôi đồng ý với tất điều khoản trên

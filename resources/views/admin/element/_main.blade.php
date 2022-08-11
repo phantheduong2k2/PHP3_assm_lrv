@@ -11,7 +11,7 @@
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a>
                             </li>
-                            <li class="breadcrumb-item"><a href="#!">Dashboard Analytics</a></li>
+                            <li class="breadcrumb-item"><a href="{{ Route('home-client') }}">Quay trở lại home</a></li>
                         </ul>
                     </div>
                 </div>

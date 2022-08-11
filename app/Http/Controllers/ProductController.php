@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\product;
 use App\Http\Requests\StoreproductRequest;
 use App\Http\Requests\UpdateproductRequest;
+use App\Http\Requests\Product\StoreProduct;
+use App\Models\AttributeProduct;
+use App\Models\Attributes;
 use App\Models\Category;
+use Attribute;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -23,9 +27,9 @@ class ProductController extends Controller
             ->paginate(5);
         }else{
             $product = product::select('*')
-            ->with('category')
             ->paginate(5);
         }
+
 
         return view('admin.product.list',[
             'product_list' => $product,
@@ -41,9 +45,14 @@ class ProductController extends Controller
      */
     public function create()
     {
+
+        $atributeColor = Attributes::where('name','color')->get();
+        $atributeSize = Attributes::where('name','size')->get();
         $category = Category::select('id', 'name')->get();
         return view('admin.product.add', [
-            'cate_list' => $category
+            'cate_list' => $category,
+            'color'     => $atributeColor,
+            'size'      => $atributeSize
         ]);
     }
 
@@ -65,7 +74,9 @@ class ProductController extends Controller
     }
 
     // Ham save file
-    public function store(Request $request)
+
+
+    public function store(StoreProduct $request)
     {
         $product = new Product();
         $product->fill($request->all());
@@ -78,8 +89,15 @@ class ProductController extends Controller
             } else {
                 $product->avatar = '';
             }
-
             $product->save();
+
+            foreach($request->attr_pro_id as $value){
+             AttributeProduct::create([
+                   'pro_id' => $product->id,
+                   'attr_pro_id' =>$value
+             ]);
+      }
+
             return redirect(Route('product-list'));
     }
 
@@ -100,14 +118,27 @@ class ProductController extends Controller
      * @param  \App\Models\product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(product $product, $id)
+    public function edit(Request $request, $id)
     {
+
         $category = Category::select('id', 'name')->get();
         $product = product::find($id);
 
+     $productColor = $product->attributes()
+    -> where('name','color')
+     ->get();
+
+     $productSize = $product->attributes()
+     -> where('name','size')
+      ->get();
+
+
         return view('admin.product.edit',[
+
            'cate_list' => $category,
-           'pro_list' => $product
+           'pro_list' => $product,
+           'pro_color' => $productColor,
+           'pro_size' =>  $productSize
         ]);
 
     }
@@ -119,8 +150,9 @@ class ProductController extends Controller
      * @param  \App\Models\product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreProduct $request, $id)
     {
+
         $product = product::find($id);
         $product->fill($request->all());
         if ($request->hasFile('avatar')) {
@@ -144,9 +176,13 @@ class ProductController extends Controller
      */
     public function destroy(product $product, $id)
     {
-         if($id){
+        $productAttr = AttributeProduct::where('pro_id', $id)->get();
+
+        foreach($productAttr as $item){
+            AttributeProduct::destroy($item->id);
+        }
               product::destroy($id);
-         }
+
       return redirect(Route('product-list'))->with('msg-dl', 'xoa thanh cong');
     }
 
@@ -160,4 +196,5 @@ class ProductController extends Controller
          product::where('id', $id)->update(['status'=> $status]);
          return redirect()->back();
     }
+
 }

@@ -31,7 +31,7 @@
                     <label for="inputState" class="form-label">San pham thuoc danh muc</label>
                    <select name="categorie_id" class="form-control"  id="inputState">
                     @foreach ($cate_list as $item )
-                    <option value="{{ $item->id }}"
+                    <option  value="{{ $item->id }}"
                          {{$pro_list->categorie_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                     @endforeach
                    </select>
@@ -51,6 +51,26 @@
                         </label>
                     </div>
                 </div>
+                <div class="mb-3">
+                    <label for="inputState" class="form-label"><h6>Màu sắc: </h6></label>
+                    @foreach ($pro_color as $item )
+                    <label class="custom-control custom-radio custom-control-inline">
+                        <input class="form-check-input" type="checkbox" value="{{  $item->id }}" name="attr_pro_id[]" >
+
+                        <label class="form-check-label" for=""><span style="background-color: {{ $item->value }}" class="badge badge-primary">color</span></label>
+                    </label>
+                    @endforeach
+                </div>
+                <div class="mb-3">
+                    <label for="inputState" class="form-label"><h6>Size: </h6></label>
+                    @foreach ($pro_size as $item )
+                    <label class="custom-control custom-radio custom-control-inline">
+                        <input class="form-check-input" type="checkbox" value="{{  $item->id }}" name="attr_pro_id[]" >
+                        <label class="form-check-label" for="">{{ $item->value }}</label>
+                    </label>
+                    @endforeach
+                </div>
+
                 <button type="reset" class="btn btn-primary">Reset</button>
                 <a class="btn btn-primary" href="{{ Route('product-list') }}">Back</a>
                 <button type="submit" class="btn btn-primary">Submit</button>

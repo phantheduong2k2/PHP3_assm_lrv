@@ -29,18 +29,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label"><h5>Level của người dùng</h5> </label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="level" value="1" id="flexRadioDefault1">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                         Người quản trị
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="level" value="0" id="flexRadioDefault1">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                          Khách hàng
-                        </label>
-                    </div>
+                    <select name="level" class="form-control"  id="inputState">
+                        <option value="0">Khách hàng</option>
+                        <option value="1"">Nhân viên</option>
+                        <option value="2">Quản trị</option>
+                    </select>
                 </div>
                 <button type="reset" class="btn btn-primary">Reset</button>
                 <a class="btn btn-primary" href="{{ Route('user-list') }}">Back</a>

@@ -37,17 +37,15 @@
                                     <img src="{{ asset($item->avatar) }}" width="100" alt="">
                                 </td>
                                 <td>
-                                    @if ($item->level == 1)
-                                        <a href="{{ Route('user-updateLevel', $item->id) }}"
-                                            class="btn btn-success">Quan tri</a>
-                                    @else
-                                        <a href="{{ Route('user-updateLevel', $item->id) }}"
-                                            class="btn btn-danger">Khach hang</a>
+                                    @if ($item->level == 2)
+                                    <span>Quản trị</span>
+                                    @elseif ($item->level == 1)
+                                        <a href="{{ Route('user-updateLevel', $item->id) }}" class="btn btn-success">Nhân viên</a>
+                                    @elseif ($item->level == 0)
+                                    <a href="{{ Route('user-updateLevel', $item->id) }}" class="btn btn-danger">Khách hàng</a>
                                     @endif
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-warning"
-                                        href="">Delete</a>
                                     <a class="btn  btn-info" href="">Edit</a>
 
                                 </td>
@@ -62,5 +60,3 @@
         </div>
     </div>
 @endsection
-
-

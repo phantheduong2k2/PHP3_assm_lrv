@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateHomeRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\product;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Cart;
 
 
 class HomeController extends Controller
@@ -20,6 +22,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+
         $category = Category::select('id', 'name')->get();
 
         $name = $request->get('name');
@@ -34,10 +37,19 @@ class HomeController extends Controller
         }
 
 
+
+            $cart = Cart::select('*')
+            ->where('user_id', Auth::id() )
+            ->get();
+
+
+
+
         return view('client.hompage.index',[
            'product_list' => $product,
            'name' => $name,
-           'category_list' => $category
+           'category_list' => $category,
+           'cart' =>  $cart,
         ]);
     }
 

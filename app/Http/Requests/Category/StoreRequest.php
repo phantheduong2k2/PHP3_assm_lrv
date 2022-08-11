@@ -14,6 +14,8 @@ class StoreRequest extends FormRequest
     public function authorize()
     {
         return true;
+        // Điều kiện để có thể gửi yêu cầu đi
+        // Nếu false thì không có quyền gửi yêu cầu 403
     }
 
     /**
@@ -24,12 +26,9 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
-                'bail',
-                'required',
-                'min:5',
-                'unique:App\Models\Category,name'
-            ]
+            'name' => 'required|min:2|max:15',
+            'email' => 'required|email',
+            'phone' => 'required'
 
         ];
     }
@@ -37,9 +36,12 @@ class StoreRequest extends FormRequest
     public function messages()
     {
         return [
-           'required' => 'Tên danh mục không được để trống',
-           'min'=> 'Tên danh mục bắt buộc phải trên 5 kí tự',
-           'unique'=> 'Tên danh mục đã tông tại'
+            'name.required' => 'Tên bắt buộc nhập',
+            'name.min' => 'Tên tối thiểu 2 ký tự',
+            'name.max' => 'Tên tối đa 15 ký tự',
+            'email.required' => 'Email bắt buộc nhập',
+            'email.email' => 'Email phải đúng định dạng',
+            'phone.required' => 'SĐT bắt buộc nhập'
         ];
     }
 }

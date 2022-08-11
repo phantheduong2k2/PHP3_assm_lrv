@@ -4,6 +4,11 @@
         <div class="card-header">
             <h3 class="tile-header">List product</h3>
         </div>
+        @if (session('msg-dl'))
+        <div class="alert alert-success" role="alert">
+            {{ session('msg-dl') }}
+        </div>
+    @endif
         <div class="card-body">
             <caption>
                 <form action="{{ Route('product-list') }}" method="get">
@@ -23,7 +28,7 @@
                             <th>Ten san pham</th>
                             <th>Gia</th>
                             <th>Image</th>
-                            <th>Danh muc</th>
+                            <th>San pham thuoc danh muc</th>
                             <th>Trang thai</th>
                             <th>Chuc nang</th>
                         </tr>
@@ -37,9 +42,7 @@
                                 <td>
                                     <img src="{{ asset($item->avatar) }}" width="100" alt="">
                                 </td>
-                                <td>
-                                    {{ $item->category->name }}
-                                </td>
+                                <td>{{ $item->category->name }}</td>
                                 <td>
                                     @if ($item->status == 0)
                                         <a href="{{ Route('product-updateStatus', $item->id) }}"

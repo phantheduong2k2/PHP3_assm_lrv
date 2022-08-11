@@ -7,6 +7,7 @@
 <!--===============================================================================================-->
 	<script src="{{ asset('assets/vendor/animsition/js/animsition.min.js') }}"></script>
 <!--===============================================================================================-->
+<script src="{{ asset('assets/vendor/bootstrap/js/popper.js') }}"></script>
 
 	<script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <!--===============================================================================================-->

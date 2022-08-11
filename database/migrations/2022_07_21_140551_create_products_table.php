@@ -19,9 +19,10 @@ return new class extends Migration
             $table->integer('price');
             $table->string('avatar');
             $table->string('description');
-            $table->unsignedBigInteger('categorie_id');
-            $table->foreign('categorie_id')->references('id')->on('categories');
             $table->tinyInteger('status')->nullable()->default(0);
+
+            $table->foreignId('categorie_id');
+            $table->foreign('categorie_id')->references('id')->on('categories');
 
             $table->timestamps();
         });

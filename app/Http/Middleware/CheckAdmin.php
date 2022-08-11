@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class CheckLogin
+class CheckAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,10 +17,10 @@ class CheckLogin
      */
     public function handle(Request $request, Closure $next)
     {
+        if(Auth::user()->level > 1 ){
+            return $next($request);
+        }
+        return redirect(Route('dashboard'))->with('msg_role', 'Bạn chưa được cấp quyền để vào chức năng này!');
 
-       if(!session()->has('level')){
-        redirect(Route('regiter-login-client'));
-       }
-        return $next($request);
     }
 }

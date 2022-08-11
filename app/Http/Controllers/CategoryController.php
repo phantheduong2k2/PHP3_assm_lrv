@@ -6,6 +6,11 @@ namespace App\Http\Controllers;
 use Yajra\Datatables\Datatables;
 use App\Models\Category;
 use App\Http\Requests\Category\StoreRequest;
+use App\Models\AttributeProduct;
+use App\Models\product;
+
+use App\Models\Attributes;
+use Attribute;
 use Illuminate\Http\Request;
 use Prophecy\Call\Call;
 
@@ -103,6 +108,17 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category, $id)
     {
+        $product = product::where('categorie_id', $id)->get();
+
+
+
+        foreach($product as $item){
+
+            product::destroy($item->id);
+        }
+
+
+
         Category::destroy($id);
         return redirect(Route('category-list'))->with('msg-dl', 'Bạn đã xóa thành công!');
     }

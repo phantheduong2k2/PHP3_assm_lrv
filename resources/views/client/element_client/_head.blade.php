@@ -17,6 +17,7 @@
         href="{{ asset('assets/fontsClient/linearicons-v1.0.0/icon-font.min.css') }}">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/animate/animate.css') }}">
+
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/css-hamburgers/hamburgers.min.css') }}">
     <!--===============================================================================================-->
