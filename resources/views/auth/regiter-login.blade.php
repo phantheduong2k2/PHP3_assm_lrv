@@ -130,7 +130,7 @@
                 </div>
 
                 <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
-                    <form action="{{ Route('regiter-client') }}" method="POST">
+                    <form action="{{ Route('regiter-client') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <h4 class="mtext-105 cl2 txt-center p-b-30">
                            Regiter user
@@ -153,6 +153,11 @@
                                 @if ($errors->has('password_rg'))
                                 <div class="alert alert-danger"><span>{{ $errors->first('password') }} </span></div>
                             @endif
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Avatar</label>
+                            <input type="file" class="form-control" name="avatar" id="exampleInputEmail1"
+                                aria-describedby="emailHelp">
                         </div>
                         <div class="bor8 m-b-20 how-pos4-parent">
                             <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="email" name="email"

@@ -45,6 +45,15 @@ class AuthController extends Controller
     }
 
     // ---------------------------LogOut-------------------------------
+    private function saveFile($file, $prefixName = '', $folder = 'public')
+    {
+        $fileName = $file->hashName();
+        $fileName = $prefixName
+            ? $prefixName . '_' . $fileName
+            : $fileName;
+
+        return $file->storeAs($folder, $fileName);
+    }
 
     public function PostRegiter(RegiterRequest $request){
 
@@ -58,8 +67,18 @@ class AuthController extends Controller
         $dataRegiter->email = $request->email;
         $dataRegiter->phone = $request->phone;
         $dataRegiter->address = $request->address;
+        if ($request->hasFile('avatar')) {
+            $dataRegiter->avatar = $this->saveFile(
+                $request->avatar,
+                $request->name,
+                'images/user/'
+            );
+        } else {
+            $dataRegiter->avatar = '';
+        }
 
-       $dataRegiter->save();
+        $dataRegiter->save();
+
 
        return redirect(Route('getLogin-client'))->with('msg_rg', 'Đăng kí tài khoản thành công!');
 
