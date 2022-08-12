@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Schema;
         Schema::table('users', function (Blueprint $table) {
            $table->integer('phone');
            $table->string('address');
+           $table->string('avatar')->nullable();
         });
     }
 
