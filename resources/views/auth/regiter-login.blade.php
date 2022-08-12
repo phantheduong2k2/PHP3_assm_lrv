@@ -156,7 +156,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Avatar</label>
-                            <input type="file" class="form-control" name="avatar" id="exampleInputEmail1"
+                            <input type="file" class="form-control" name="avatar" placeholder="avatar" id="exampleInputEmail1"
                                 aria-describedby="emailHelp">
                         </div>
                         <div class="bor8 m-b-20 how-pos4-parent">
@@ -178,6 +178,14 @@
                            @if ($errors->has('address'))
                            <div class="alert alert-danger"><span>{{ $errors->first('address') }} </span></div>
                        @endif
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label"><h5>Level của người dùng</h5> </label>
+                            <select name="level" class="form-control"  id="inputState">
+                                <option value="0">Khách hàng</option>
+                                <option value="1"">Nhân viên</option>
+                                <option value="2">Quản trị</option>
+                            </select>
                         </div>
                         <div class="custom-control custom-checkbox text-left mb-4 mt-2">
 							<input type="checkbox" style="margin-right: 10px" id="customCheck1"> Tôi đồng ý với tất điều khoản trên

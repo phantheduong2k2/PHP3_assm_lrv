@@ -67,6 +67,7 @@ class AuthController extends Controller
         $dataRegiter->email = $request->email;
         $dataRegiter->phone = $request->phone;
         $dataRegiter->address = $request->address;
+        $dataRegiter->level = $request->level;
         if ($request->hasFile('avatar')) {
             $dataRegiter->avatar = $this->saveFile(
                 $request->avatar,
