@@ -47,7 +47,10 @@ class AttributesController extends Controller
      */
     public function store(Request $request)
     {
-        Attributes::create($request->all());
+        $attributes = new Attributes();
+        $attributes = $request->all();
+        $attributes->save();
+
         return redirect(Route('attribute-create'))->with('msg-suc', 'Bạn đã thêm thành công thuôc tính!');
     }
 
