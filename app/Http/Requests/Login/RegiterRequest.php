@@ -26,7 +26,7 @@ class RegiterRequest extends FormRequest
         return [
             'name' => 'required|min:2|max:20',
             'password' => 'required|min:5|max:20',
-            'email' => 'required|email|unique:App\Models\User,email,id',
+            'email' => 'required|email|',
             'phone' => 'required|min:9|max:12',
             'address' => 'required|min:30|max:100'
             //
@@ -37,7 +37,6 @@ class RegiterRequest extends FormRequest
         return [
             'email.required' => 'Bạn chưa nhập email',
             'email.email' => 'Email của bạn không đúng định dạng',
-            'email.unique' => 'Email này của bạn đã được đăng kí',
             // ----------------eamil---------------------
 
             'password.min' => 'password tối thiểu 5 ký tự',
