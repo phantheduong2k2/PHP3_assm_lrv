@@ -60,7 +60,7 @@
                         <i class="zmdi zmdi-search"></i>
                     </div>
 
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="1">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ \App\Models\Cart::select('*')->where('user_id', Auth::id() )-> orderBy('id', 'desc')->get()->count() }}">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
 
