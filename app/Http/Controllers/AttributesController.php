@@ -8,7 +8,6 @@ use App\Http\Requests\StoreAttributesRequest;
 use App\Http\Requests\UpdateAttributesRequest;
 use App\Models\AttributeProduct;
 use App\Models\product;
-
 use Attribute;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Foreach_;
@@ -48,10 +47,10 @@ class AttributesController extends Controller
      */
     public function store(Request $request)
     {
-        $attributes = new Attributes();
-        $attributes = $request->all();
-        $attributes->save();
-
+    //     $attributes = new Attributes();
+    //     $attributes = $request->all();
+    //  $attributes =      $attributes->save();
+     Attributes::create($request->all());
         return redirect(Route('attribute-create'))->with('msg-suc', 'Bạn đã thêm thành công thuôc tính!');
     }
 
