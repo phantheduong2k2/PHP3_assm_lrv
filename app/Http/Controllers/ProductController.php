@@ -7,9 +7,10 @@ use App\Http\Requests\StoreproductRequest;
 use App\Http\Requests\UpdateproductRequest;
 use App\Http\Requests\Product\StoreProduct;
 use App\Models\AttributeProduct;
-use App\Models\Attributes;
+use App\Models\Attribute;
+
 use App\Models\Category;
-use Attribute;
+
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -46,8 +47,8 @@ class ProductController extends Controller
     public function create()
     {
 
-        $atributeColor = Attributes::where('name','color')->get();
-        $atributeSize = Attributes::where('name','size')->get();
+        $atributeColor = Attribute::where('name','color')->get();
+        $atributeSize = Attribute::where('name','size')->get();
         $category = Category::select('id', 'name')->get();
         return view('admin.product.add', [
             'cate_list' => $category,
@@ -124,11 +125,11 @@ class ProductController extends Controller
         $category = Category::select('id', 'name')->get();
         $product = product::find($id);
 
-     $productColor = $product->attributes()
+     $productColor = $product->Attribute()
     -> where('name','color')
      ->get();
 
-     $productSize = $product->attributes()
+     $productSize = $product->Attribute()
      -> where('name','size')
       ->get();
 
