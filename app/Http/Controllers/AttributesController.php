@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\Attributes;
+
 use App\Http\Requests\StoreAttributesRequest;
 use App\Http\Requests\UpdateAttributesRequest;
 use App\Models\AttributeProduct;
 use App\Models\product;
-use Attribute;
+use App\Models\Attributes;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Foreach_;
 

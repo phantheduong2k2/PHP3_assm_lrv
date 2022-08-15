@@ -55,10 +55,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-       $categoryNew = new Category();
-       $categoryNew->fill($request->all());
-       $categoryNew->save();
-    //    Category::create($request->all());
+    //    $categoryNew = new Category();
+    //    $categoryNew->fill($request->all());
+    //    $categoryNew->save();
+       Category::create($request->all());
        return redirect(Route('category-list'))->with('msg-suc', 'Bạn đã thêm thành công!');
     }
 

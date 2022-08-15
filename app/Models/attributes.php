@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Attribute;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Attributes extends Model
 {
-    protected $table = 'attributes';
     protected $fillable = [
         'id',
         'name',
