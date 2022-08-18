@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\product;
+
 use App\Http\Requests\StoreproductRequest;
 use App\Http\Requests\UpdateproductRequest;
 use App\Http\Requests\Product\StoreProduct;
 use App\Models\AttributeProduct;
+use App\Models\product;
 use App\Models\Attribute;
-
+use App\Models\Attributes;
 use App\Models\Category;
 
 use Illuminate\Http\Request;
@@ -47,8 +48,8 @@ class ProductController extends Controller
     public function create()
     {
 
-        $atributeColor = Attribute::where('name','color')->get();
-        $atributeSize = Attribute::where('name','size')->get();
+        $atributeColor = Attributes::where('name','color')->get();
+        $atributeSize = Attributes::where('name','size')->get();
         $category = Category::select('id', 'name')->get();
         return view('admin.product.add', [
             'cate_list' => $category,
@@ -85,7 +86,7 @@ class ProductController extends Controller
             $product->avatar = $this->saveFile(
                     $request->avatar,
                     $request->name,
-                    'images/product/'
+                    'images/product'
                 );
             } else {
                 $product->avatar = '';
@@ -125,11 +126,10 @@ class ProductController extends Controller
         $category = Category::select('id', 'name')->get();
         $product = product::find($id);
 
-     $productColor = $product->Attribute()
+     $productColor = $product->attributes()
     -> where('name','color')
      ->get();
-
-     $productSize = $product->Attribute()
+     $productSize = $product->attributes()
      -> where('name','size')
       ->get();
 
@@ -160,7 +160,7 @@ class ProductController extends Controller
             $product->avatar = $this->saveFile(
                 $request->avatar,
                 $request->name,
-                'images/product/'
+                'images/product'
             );
         }
 
