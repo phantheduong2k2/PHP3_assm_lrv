@@ -86,7 +86,7 @@ class ProductController extends Controller
             $product->avatar = $this->saveFile(
                     $request->avatar,
                     $request->name,
-                    'images/product'
+                    'images'
                 );
             } else {
                 $product->avatar = '';
@@ -160,7 +160,7 @@ class ProductController extends Controller
             $product->avatar = $this->saveFile(
                 $request->avatar,
                 $request->name,
-                'images/product'
+                'images'
             );
         }
 
