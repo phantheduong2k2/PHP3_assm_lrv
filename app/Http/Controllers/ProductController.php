@@ -82,7 +82,7 @@ class ProductController extends Controller
         $product = new Product();
         $product->fill($request->all());
             if ($request->hasFile('avatar')) {
-                $product->avatar = $this->saveFile(
+            $product->avatar = $this->saveFile(
                     $request->avatar,
                     $request->name,
                     'images/product/'

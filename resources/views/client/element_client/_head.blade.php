@@ -5,7 +5,7 @@
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="{{ asset('assets/images/client/icons/favicon.png') }}" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" href="/assets/bootstrap/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/fontsClient/font-awesome-4.7.0/css/font-awesome.min.css') }}">
