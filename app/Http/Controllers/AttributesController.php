@@ -8,7 +8,7 @@ use App\Http\Requests\StoreAttributesRequest;
 use App\Http\Requests\UpdateAttributesRequest;
 use App\Models\AttributeProduct;
 use App\Models\product;
-use App\Models\Attribute;
+use App\Models\Attributes;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Foreach_;
 
@@ -21,7 +21,7 @@ class AttributesController extends Controller
      */
     public function index()
     {
-        $attributes = Attribute::select('id', 'name','value')
+        $attributes = Attributes::select('id', 'name','value')
         ->paginate(5);
 
         return view('admin.attribute.list',[
@@ -50,7 +50,7 @@ class AttributesController extends Controller
     //     $attributes = new Attributes();
     //     $attributes = $request->all();
     //  $attributes =      $attributes->save();
-    Attribute::create($request->all());
+    Attributes::create($request->all());
         return redirect(Route('attribute-create'))->with('msg-suc', 'Bạn đã thêm thành công thuôc tính!');
     }
 
@@ -60,10 +60,10 @@ class AttributesController extends Controller
      * @param  \App\Models\Attributes  $attributes
      * @return \Illuminate\Http\Response
      */
-    public function show(Attribute $attributes, $id)
+    public function show(Attributes $attributes, $id)
     {
 
-         $attributes = Attribute::find($id);
+         $attributes = Attributes::find($id);
 
 
          return view('admin.attribute.detail',[
@@ -78,7 +78,7 @@ class AttributesController extends Controller
      * @param  \App\Models\Attributes  $attributes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Attribute $attributes)
+    public function edit(Attributes $attributes)
     {
         //
     }
@@ -90,7 +90,7 @@ class AttributesController extends Controller
      * @param  \App\Models\Attributes  $attributes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Attribute $attributes)
+    public function update(Request $request, Attributes $attributes)
     {
         //
     }
@@ -98,7 +98,7 @@ class AttributesController extends Controller
 
     public function destroy($id){
 
-         $attributes = Attribute::find($id);
+         $attributes = Attributes::find($id);
 
         $attributesPro = $attributes->attributesPro()->get();
 
@@ -108,7 +108,7 @@ class AttributesController extends Controller
 
 
         if($id){
-            Attribute::destroy($id);
+            Attributes::destroy($id);
         }
 
 
