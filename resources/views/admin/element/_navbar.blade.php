@@ -4,7 +4,7 @@
             <div class="">
                 <div class="main-menu-header">
 
-                    <img class="img-radius" src=""" alt="User-Profile-Image">
+                    <img class="img-radius" src="{{Auth::user()->avatar}}" alt="User-Profile-Image">
                     <div class="user-details">
                         <div id="more-details">
                             @if (Auth::check())

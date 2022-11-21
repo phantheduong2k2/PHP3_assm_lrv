@@ -41,7 +41,6 @@
                     <tbody>
                         @foreach ($list_data as $item )
                         <tr>
-                            <td>{{ $item->id }}</td>
                             <td>{{ $item->name }}</td>
                             <td>
                                 @foreach ($item->products as $product )

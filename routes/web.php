@@ -5,18 +5,17 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 // Backend Controller
-use App\Http\Controllers\AttibuteValueController;
 use App\Http\Controllers\AttributesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use  App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\frontend\CartController;
 // Frontend Controller
 use App\Http\Controllers\frontend\ContactController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\ProductHomeController;
-use App\Models\AttributeValue;
-use App\Models\Category;
+
 
 use Laravel\Socialite\Facades\Socialite;
 
@@ -60,6 +59,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home-client');
 
     Route::get('contact', [ContactController::class, 'index'])->name('contact-client');
+
+    Route::post('addComment', [CommentController::class, 'store'])->name('add-comment');
 
     Route::prefix('product')->group(function () {
 

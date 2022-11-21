@@ -16,8 +16,7 @@ return new class extends Migration
         Schema::create('attribute_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pro_id');
-            $table->foreign('pro_id')->references('id')->on('products');
-            $table->foreignId('attr_pro_id')->references('id')->on('attributes');
+            $table->foreignId('attr_pro_id');
             $table->timestamps();
         });
     }

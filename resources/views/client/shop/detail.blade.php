@@ -232,7 +232,8 @@
 
                     <li class="nav-item p-b-10">
                         <a class="nav-link" data-toggle="tab" href="#reviews" role="tab"
-                            aria-expanded="false">Reviews (1)</a>
+                            aria-expanded="false">Reviews <input type="text" disabled
+                                value="{{ \App\Models\comment::select('*')->where('pro_id', $product_detail->id)->orderBy('id', 'desc')->get()->count() }}"></a>
                     </li>
                 </ul>
 
@@ -347,7 +348,9 @@
                                     </div>
 
                                     <!-- Add review -->
-                                    <form class="w-full">
+                                    <form class="w-full" action="{{ Route('add-comment') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="pro_id" value="{{ $product_detail->id }}">
                                         <h5 class="mtext-108 cl2 p-b-7">
                                             Add a review
                                         </h5>
@@ -370,24 +373,17 @@
                                                 <input class="dis-none" type="number" name="rating">
                                             </span>
                                         </div>
-
+                                        @if (session('success'))
+                                            <div class="alert alert-success" role="alert">
+                                                {{ session('success') }}
+                                            </div>
+                                        @endif
                                         <div class="row p-b-25">
                                             <div class="col-12 p-b-5">
                                                 <label class="stext-102 cl3" for="review">Your review</label>
-                                                <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
+                                                <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="comment"></textarea>
                                             </div>
 
-                                            <div class="col-sm-6 p-b-5">
-                                                <label class="stext-102 cl3" for="name">Name</label>
-                                                <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name"
-                                                    type="text" name="name">
-                                            </div>
-
-                                            <div class="col-sm-6 p-b-5">
-                                                <label class="stext-102 cl3" for="email">Email</label>
-                                                <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email"
-                                                    type="text" name="email">
-                                            </div>
                                         </div>
 
                                         <button

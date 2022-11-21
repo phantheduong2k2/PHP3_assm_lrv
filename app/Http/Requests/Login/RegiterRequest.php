@@ -26,8 +26,8 @@ class RegiterRequest extends FormRequest
         return [
             'name' => 'required|min:2|max:20',
             'password' => 'required|min:5|max:20',
-            'email' => 'required|email|',
-            'phone' => 'required|min:9|max:12',
+            'email' => 'required|email|unique:users',
+            'phone' => 'required',
             'address' => 'required|min:30|max:100'
             //
         ];
@@ -37,6 +37,7 @@ class RegiterRequest extends FormRequest
         return [
             'email.required' => 'Bạn chưa nhập email',
             'email.email' => 'Email của bạn không đúng định dạng',
+            'email.unique' => 'Email của bạn đã được đăng kí',
             // ----------------eamil---------------------
 
             'password.min' => 'password tối thiểu 5 ký tự',
@@ -50,8 +51,6 @@ class RegiterRequest extends FormRequest
             // --------------name------------------------
 
             'phone.required' => 'Bạn chưa nhập số điện thoai',
-            'phone.min' => 'Số điện thoại tối thiểu 9 kí tự',
-            'phone.max' => 'Số điện thoại tối đa 12 kí tự',
             // ----------------phone----------------------
 
             'address.required' => 'Bạn chưa nhập địa chỉ',

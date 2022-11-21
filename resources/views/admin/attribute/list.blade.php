@@ -1,5 +1,6 @@
 @extends('layout.master')
 @section('col-sm-12')
+
     <div class="card">
         <div class="card-header">
             <h3 class="tile-header">List attribute</h3>
@@ -10,7 +11,7 @@
             </div>
         @endif
         @if (session('msg-edit'))
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success"    role="alert">
                 {{ session('msg-edit') }}
             </div>
         @endif
@@ -40,7 +41,7 @@
                                     <td>{{ $item->value }}</td>
                                     <td>
                                         <a class="btn  btn-primary"
-                                            href="{{ Route('attribute-delete', $item->id) }}">Delete</a>
+                                           href="{{ Route('attribute-delete', $item->id) }}">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

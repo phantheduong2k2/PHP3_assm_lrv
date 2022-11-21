@@ -63,20 +63,19 @@ class AuthController extends Controller
         $dataRegiter->name = $request->name;
 
         $dataRegiter->password = Hash::make($request->password);
-
         $dataRegiter->email = $request->email;
         $dataRegiter->phone = $request->phone;
         $dataRegiter->address = $request->address;
-        $dataRegiter->level = $request->level;
-        if ($request->hasFile('avatar')) {
-            $dataRegiter->avatar = $this->saveFile(
-                $request->avatar,
-                $request->name,
-                'images/user/'
-            );
-        } else {
-            $dataRegiter->avatar = '';
-        }
+
+        // if ($request->hasFile('avatar')) {
+        //     $dataRegiter->avatar = $this->saveFile(
+        //         $request->avatar,
+        //         $request->name,
+        //         'images/user/'
+        //     );
+        // } else {
+        //     $dataRegiter->avatar = '';
+        // }
 
         $dataRegiter->save();
 
@@ -101,7 +100,6 @@ class AuthController extends Controller
     public function loginGoogleCallback()
     {
         $googleUser = Socialite::driver('google')->user();
-   dd( $googleUser);
         if ($googleUser) {
             // 1. Xem xem user này đã tồn tại trong DB chưa
             $user = User::where('email', $googleUser->email)->first();

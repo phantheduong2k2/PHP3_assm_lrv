@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+
 use Yajra\Datatables\Datatables;
 use App\Models\Category;
 use App\Http\Requests\Category\StoreRequest;
@@ -13,6 +14,7 @@ use App\Models\Attributes;
 use Attribute;
 use Illuminate\Http\Request;
 use Prophecy\Call\Call;
+
 
 
 class CategoryController extends Controller
@@ -61,7 +63,6 @@ class CategoryController extends Controller
        Category::create($request->all());
        return redirect(Route('category-list'))->with('msg-suc', 'Bạn đã thêm thành công!');
     }
-
     /**
      * Display the specified resource.
      *

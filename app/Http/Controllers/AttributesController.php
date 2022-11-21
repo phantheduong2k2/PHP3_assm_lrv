@@ -117,7 +117,7 @@ class AttributesController extends Controller
           return redirect(Route('attribute-list'))->with('msg-dl', 'xóa thành công thuộc tính');
     }
 
-    /**
+    /**`
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Attributes  $attributes

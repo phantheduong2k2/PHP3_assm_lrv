@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('pro_color');
             $table->string('quantity');
             $table->foreignId('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+
 
 
 

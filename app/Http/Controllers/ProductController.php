@@ -24,16 +24,16 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $name = $request->get('name');
-        if($name){
-            $product = product::Where('name','like','%'. $name. '%')
-            ->paginate(5);
-        }else{
+        if ($name) {
+            $product = product::Where('name', 'like', '%' . $name . '%')
+                ->paginate(5);
+        } else {
             $product = product::select('*')
-            ->paginate(5);
+                ->paginate(5);
         }
 
 
-        return view('admin.product.list',[
+        return view('admin.product.list', [
             'product_list' => $product,
             'name' => $name
         ]);
@@ -48,8 +48,8 @@ class ProductController extends Controller
     public function create()
     {
 
-        $atributeColor = Attributes::where('name','color')->get();
-        $atributeSize = Attributes::where('name','size')->get();
+        $atributeColor = Attributes::where('name', 'color')->get();
+        $atributeSize = Attributes::where('name', 'size')->get();
         $category = Category::select('id', 'name')->get();
         return view('admin.product.add', [
             'cate_list' => $category,
@@ -65,15 +65,13 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    private function saveFile($file, $prefixName = '', $folder = 'public')
-    {
+    private function saveFile($file, $prifixName = '', $folder = 'public'){
         $fileName = $file->hashName();
-        $fileName = $prefixName
-            ? $prefixName . '_' . $fileName
-            : $fileName;
-
-        return $file->storeAs($folder, $fileName);
-    }
+        $fileName = $prifixName
+         ? $prifixName. '_' . $fileName
+         : $fileName;
+         return $file->storeAs($folder, $fileName);
+     }
 
     // Ham save file
 
@@ -82,25 +80,32 @@ class ProductController extends Controller
     {
         $product = new Product();
         $product->fill($request->all());
-            if ($request->hasFile('avatar')) {
-            $product->avatar = $this->saveFile(
-                    $request->avatar,
-                    $request->name,
-                    'images'
-                );
-            } else {
-                $product->avatar = '';
-            }
-            $product->save();
+        if ($request->hasFile('avatar')) {
+            // Nếu trường avatar có file thì sẽ trả về true
+            // 3.1 Xử lý tên file
+            $avatar = $request->avatar;
+            $avatarName = $avatar->hashName();
+            $avatarName = $request->username . '_' . $avatarName;
+            // dd($avatar->storeAs('images/users', $avatarName));
+            // 3.2 Lưu file và gán đường dẫn cho $user->avatar
+            $product->avatar = $avatar->storeAs('images/users', $avatarName);
+            // storage/app/images/users
+            // Cấu hình config/filesystems.php để public/images ~ storage/app/images
+            // Chạy câu lệnh: php artisan storage:link
+        } else {
+            $product->avatar = '';
+        }
 
-            foreach($request->attr_pro_id as $value){
-             AttributeProduct::create([
-                   'pro_id' => $product->id,
-                   'attr_pro_id' =>$value
-             ]);
-      }
+        $product->save();
 
-            return redirect(Route('product-list'));
+        foreach ($request->attr_pro_id as $value) {
+            AttributeProduct::create([
+                'pro_id' => $product->id,
+                'attr_pro_id' => $value
+            ]);
+        }
+
+        return redirect(Route('product-list'));
     }
 
     /**
@@ -126,22 +131,21 @@ class ProductController extends Controller
         $category = Category::select('id', 'name')->get();
         $product = product::find($id);
 
-     $productColor = $product->attributes()
-    -> where('name','color')
-     ->get();
-     $productSize = $product->attributes()
-     -> where('name','size')
-      ->get();
+        $productColor = $product->attributes()
+            ->where('name', 'color')
+            ->get();
+        $productSize = $product->attributes()
+            ->where('name', 'size')
+            ->get();
 
 
-        return view('admin.product.edit',[
+        return view('admin.product.edit', [
 
-           'cate_list' => $category,
-           'pro_list' => $product,
-           'pro_color' => $productColor,
-           'pro_size' =>  $productSize
+            'cate_list' => $category,
+            'pro_list' => $product,
+            'pro_color' => $productColor,
+            'pro_size' =>  $productSize
         ]);
-
     }
 
     /**
@@ -160,13 +164,12 @@ class ProductController extends Controller
             $product->avatar = $this->saveFile(
                 $request->avatar,
                 $request->name,
-                'images'
+                'images/product'
             );
         }
 
         $save = $product->save();
         return redirect(Route('product-list'))->with('msg-ed', 'Cập nhật thành công');
-
     }
 
     /**
@@ -179,23 +182,23 @@ class ProductController extends Controller
     {
         $productAttr = AttributeProduct::where('pro_id', $id)->get();
 
-        foreach($productAttr as $item){
+        foreach ($productAttr as $item) {
             AttributeProduct::destroy($item->id);
         }
-              product::destroy($id);
+        product::destroy($id);
 
-      return redirect(Route('product-list'))->with('msg-dl', 'xoa thanh cong');
+        return redirect(Route('product-list'))->with('msg-dl', 'xoa thanh cong');
     }
 
-    public function updateStatus($id){
+    public function updateStatus($id)
+    {
         $statusUpdate = product::select('status')->where('id', $id)->first();
-        if($statusUpdate->status == 0){
+        if ($statusUpdate->status == 0) {
             $status = 1;
-        }else{
+        } else {
             $status = 0;
         }
-         product::where('id', $id)->update(['status'=> $status]);
-         return redirect()->back();
+        product::where('id', $id)->update(['status' => $status]);
+        return redirect()->back();
     }
-
 }

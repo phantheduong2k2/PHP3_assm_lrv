@@ -1,7 +1,6 @@
-
-    <!-- Header desktop -->
-    @section('header-v4')
-    <header >
+<!-- Header desktop -->
+@section('header-v4')
+    <header>
         <div class="container-menu-desktop">
             <!-- Topbar -->
             <div class="top-bar">
@@ -15,26 +14,26 @@
                             Help & FAQs
                         </a>
                         @if (Auth::check())
-                        <a href="" class="flex-c-m trans-04 p-lr-25">
-                        Wellcome   {{ Auth::user()->name }}
-                        </a>
-                      @else
-                      <a href="{{ Route('getLogin-client') }}" class="flex-c-m trans-04 p-lr-25">
-                        My Account
-                    </a>
-                    @endif
+                            <a href="" class="flex-c-m trans-04 p-lr-25">
+                                Wellcome {{ Auth::user()->name }}
+                            </a>
+                        @else
+                            <a href="{{ Route('getLogin-client') }}" class="flex-c-m trans-04 p-lr-25">
+                                My Account
+                            </a>
+                        @endif
                         @if (Auth::check())
-                        <a href="{{ Route('getLogout') }}" class="flex-c-m trans-04 p-lr-25">
-                          Log out
-                        </a>
+                            <a href="{{ Route('getLogout') }}" class="flex-c-m trans-04 p-lr-25">
+                                Log out
+                            </a>
                         @endif
-
-                        @if( Auth::user()->level > 0)
+                        @if (Auth::user()->level > 0)
                             <a href="{{ Route('user-list') }}" class="flex-c-m trans-04 p-lr-25">
-                              ADMIN
-                             </a>
-
+                                ADMIN
+                            </a>
                         @endif
+                        <div class="flex-c-m trans-04 p-lr-25"> <img style="border-radius: 30%" width="50"
+                                src="{{ Auth::user()->avatar }}" alt="User-Profile-Image"></div>
                     </div>
                 </div>
             </div>
@@ -51,7 +50,7 @@
                     <div class="menu-desktop">
                         <ul class="main-menu">
                             <li class="active-menu">
-                                <a href="{{Route('home-client') }}">Home</a>
+                                <a href="{{ Route('home-client') }}">Home</a>
                             </li>
 
                             <li>
@@ -67,26 +66,28 @@
                             </li>
 
                             <li>
-                                <a href="{{ Route('contact-client')}}">Contact</a>
+                                <a href="{{ Route('contact-client') }}">Contact</a>
                             </li>
                         </ul>
                     </div>
 
                     <!-- Icon header -->
                     <div class="wrap-icon-header flex-w flex-r-m">
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-							<i class="zmdi zmdi-search"></i>
-						</div>
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+                            <i class="zmdi zmdi-search"></i>
+                        </div>
 
-                   <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ \App\Models\Cart::select('*')->where('user_id', Auth::id() )-> orderBy('id', 'desc')->get()->count() }}">
-                    <i class="zmdi zmdi-shopping-cart"></i>
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+                            data-notify="{{ \App\Models\Cart::select('*')->where('user_id', Auth::id())->orderBy('id', 'desc')->get()->count() }}">
+                            <i class="zmdi zmdi-shopping-cart"></i>
+                        </div>
+
+
+                        <a href="#"
+                            class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11  data-notify="0">
+                            <i class="zmdi zmdi-favorite-outline"></i>
+                        </a>
                     </div>
-
-
-						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11  data-notify="0">
-							<i class="zmdi zmdi-favorite-outline"></i>
-						</a>
-					</div>
                 </nav>
             </div>
         </div>
@@ -104,11 +105,13 @@
                     <i class="zmdi zmdi-search"></i>
                 </div>
 
-                <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+                <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+                    data-notify="2">
                     <i class="zmdi zmdi-shopping-cart"></i>
                 </div>
 
-                <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+                <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
+                    data-notify="0">
                     <i class="zmdi zmdi-favorite-outline"></i>
                 </a>
             </div>
@@ -198,13 +201,10 @@
                     <button class="flex-c-m trans-04">
                         <i class="zmdi zmdi-search"></i>
                     </button>
-                    <input class="plh3" value="{{ $name }}" type="search" name="name" placeholder="Search...">
+                    <input class="plh3" value="{{ $name }}" type="search" name="name"
+                        placeholder="Search...">
                 </form>
             </div>
         </div>
     </header>
-
-    @endsection
-
-
-
+@endsection

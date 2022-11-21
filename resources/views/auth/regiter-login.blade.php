@@ -130,7 +130,7 @@
                 </div>
 
                 <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
-                    <form action="{{ Route('regiter-client') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ Route('regiter-client') }}" method="POST" >
                         @csrf
                         <h4 class="mtext-105 cl2 txt-center p-b-30">
                            Regiter user
@@ -154,11 +154,7 @@
                                 <div class="alert alert-danger"><span>{{ $errors->first('password') }} </span></div>
                             @endif
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Avatar</label>
-                            <input type="file" class="form-control" name="avatar" placeholder="avatar" id="exampleInputEmail1"
-                                aria-describedby="emailHelp">
-                        </div>
+
                         <div class="bor8 m-b-20 how-pos4-parent">
                             <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="email" name="email"
                                 placeholder="Your email">
@@ -178,14 +174,6 @@
                            @if ($errors->has('address'))
                            <div class="alert alert-danger"><span>{{ $errors->first('address') }} </span></div>
                        @endif
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label"><h5>Level của người dùng</h5> </label>
-                            <select name="level" class="form-control"  id="inputState">
-                                <option value="0">Khách hàng</option>
-                                <option value="1"">Nhân viên</option>
-                                <option value="2">Quản trị</option>
-                            </select>
                         </div>
                         <div class="custom-control custom-checkbox text-left mb-4 mt-2">
 							<input type="checkbox" style="margin-right: 10px" id="customCheck1"> Tôi đồng ý với tất điều khoản trên
